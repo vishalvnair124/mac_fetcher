@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAC Address Viewer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      #mac-address {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Get System MAC Address</h1>
+    <button onclick="getMacAddress()">Show MAC Address</button>
+    <p id="mac-address"></p>
+
+    <script>
+      async function getMacAddress() {
+        try {
+          const response = await fetch("/get-mac-address"); // Call the backend API
+          const data = await response.json();
+          document.getElementById(
+            "mac-address"
+          ).textContent = `Your MAC Address: ${data.mac_address}`;
+        } catch (error) {
+          alert("Error fetching MAC Address");
+        }
+      }
+    </script>
+  </body>
+</html>
